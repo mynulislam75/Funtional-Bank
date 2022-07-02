@@ -1,6 +1,7 @@
 
 // / Deposit and withdraw
 // get deposit & withdraw & balance id
+//      /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/
 const depositInputId = document.getElementById('deposit-id')
 const withdrawInputId = document.getElementById('withdraw')
 const balanceId = document.getElementById('balance-value')
@@ -19,13 +20,21 @@ depositBtn.addEventListener('click', function () {
         return;
     }
     // Error handling if users not enter any number
-    if ((depositInputId.value.match(/[a-zA-Z]/))) {
+    else if ((depositInputId.value.match(/[a-zA-Z]/))) {
         alert('Please enter a number');
         depositInputId.value = '';
         return;
     }
-    const depositValueNumber = parseFloat(depositValue);
 
+    // Error handling if users not enter any character
+    else if ((depositInputId.value.match(/^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/))) {
+        alert('Please enter a number');
+        depositInputId.value = '';
+        return;
+    }
+
+
+    const depositValueNumber = parseFloat(depositValue);
     // Error handling if users enter any positive number
     if (depositValueNumber < 0) {
         alert('Please enter a positive number');
@@ -64,6 +73,14 @@ withdrawBtn.addEventListener('click', function () {
         return;
     }
 
+    // Error handling if users not enter any character
+    else if ((withdrawInputId.value.match(/^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/))) {
+        alert('Please enter a number');
+        withdrawInputId.value = '';
+        return;
+    }
+
+
     const withdrawValueNumber = parseFloat(withdrawValue);
     // Error handling if users enter any positive number
     if (withdrawValueNumber < 0) {
@@ -82,7 +99,7 @@ withdrawBtn.addEventListener('click', function () {
     let balanceValueNumber = parseInt(balanceId.innerText);
     let newBalance = balanceValueNumber - withdrawValueNumber;
     if (newBalance < 0) {
-        alert('You can not withdraw')
+        alert('You can not withdraw this value')
         withdrawInputId.value = '';
         return;
     }
