@@ -10,39 +10,85 @@ const withdrawBtn = document.getElementById('withdraw-btn')
 const depositBtn = document.getElementById('deposit-btn')
 
 depositBtn.addEventListener('click', function () {
-    // console.log(877);
+
     const depositValue = depositInputId.value;
-    const depositValueNumber = parseInt(depositValue)
-    // console.log(depositValue)
+
+    // Handle empty input
+    if (depositValue === '') {
+        alert('Input can not be empty')
+        return;
+    }
+    // Error handling if users not enter any number
+    if ((depositInputId.value.match(/[a-zA-Z]/))) {
+        alert('Please enter a number');
+        depositInputId.value = '';
+        return;
+    }
+    const depositValueNumber = parseFloat(depositValue);
+
+    // Error handling if users enter any positive number
+    if (depositValueNumber < 0) {
+        alert('Please enter a positive number');
+        depositInputId.value = '';
+        return;
+    }
+
     const totalDeposit = document.getElementById('total-deposit');
-    // totalDeposit.innerText=depositValue;
     const dipositaddNumber = parseFloat(totalDeposit.innerText)
     const newUpdateDeposit = depositValueNumber + dipositaddNumber;
     totalDeposit.innerText = newUpdateDeposit;
 
     // balance calculation
-    let balanceValueNumber = parseInt(balanceId.innerText);
-    
-    let newBalance=balanceValueNumber+depositValueNumber ;
-    balanceId.innerText=newBalance
+    let balanceValueNumber = parseFloat(balanceId.innerText);
+    let newBalance = balanceValueNumber + depositValueNumber;
+    balanceId.innerText = newBalance
 
+    // clear deposit input
     depositInputId.value = '';
 })
 
 withdrawBtn.addEventListener('click', function () {
-    // console.log(8776)
+
     const withdrawValue = withdrawInputId.value;
-    const withdrawValueNumber = parseInt(withdrawValue);
-    // console.log(withdrawValue)
+    console.log(withdrawInputId.value)
+
+    // Handle empty input
+    if (withdrawValue === '') {
+        alert('Input can not be empty')
+        return;
+    }
+    // Error handling if users not enter any number
+    else if ((withdrawInputId.value.match(/[a-zA-Z]/))) {
+        alert('Please enter a number');
+        withdrawInputId.value = '';
+        return;
+    }
+
+    const withdrawValueNumber = parseFloat(withdrawValue);
+    // Error handling if users enter any positive number
+    if (withdrawValueNumber < 0) {
+        alert('Please enter a positive number');
+        withdrawInputId.value = '';
+        return;
+    }
+
+    // withdraw calculation
     const totalWithdraw = document.getElementById('total-withdraw');
-    const previousWithdrawNumber = parseInt(totalWithdraw.innerText);
+    const previousWithdrawNumber = parseFloat(totalWithdraw.innerText);
     const totalCurrentWithdraw = withdrawValueNumber + previousWithdrawNumber;
 
-    totalWithdraw.innerText = totalCurrentWithdraw;
 
     // balance calculation
     let balanceValueNumber = parseInt(balanceId.innerText);
-    let newBalance=balanceValueNumber-withdrawValueNumber ;
-    balanceId.innerText=newBalance;
+    let newBalance = balanceValueNumber - withdrawValueNumber;
+    if (newBalance < 0) {
+        alert('You can not withdraw')
+        withdrawInputId.value = '';
+        return;
+    }
+    totalWithdraw.innerText = totalCurrentWithdraw;
+    balanceId.innerText = newBalance;
+
+    // clear withdraw input
     withdrawInputId.value = '';
 })
