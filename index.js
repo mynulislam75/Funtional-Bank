@@ -17,7 +17,7 @@ buttonId.addEventListener('click', function () {
     window.location.href = 'banking.html';
     console.log('okkk')
   }
-  else if (emailValue !== 'abcd@gmail.com' || passwordValue !== '1234abcd') {
+  else if (emailValue !== 'enter@gmail.com' || passwordValue !== 'enter1234') {
     alert('Please enter right email and password');
     emailId.value = '';
     passwordId.value = '';
