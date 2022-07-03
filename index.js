@@ -13,7 +13,7 @@ buttonId.addEventListener('click', function () {
   emailValue = emailId.value;
   passwordValue = passwordId.value;
 
-  if (emailValue == 'abcd@gmail.com' && passwordValue == '1234abcd') {
+  if (emailValue == 'enter@gmail.com' && passwordValue == 'enter1234') {
     window.location.href = 'banking.html';
     console.log('okkk')
   }
